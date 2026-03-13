@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Unified FinOps Platform — Centralized Financial Intelligence</title>
+  <meta name="description"
+    content="A scalable FinOps platform that centralizes financial data from ERP systems, cloud bills, procurement tools, and spreadsheets to provide real-time spending visibility." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body>
+
+
+  <!-- ═══════════════════════════════════════
+       NAVIGATION
+  ═══════════════════════════════════════ -->
+  <nav class="navbar" id="navbar">
+    <a href="index.html" class="nav-brand">
+      <div class="nav-logo-mark">FO</div>
+      <div class="nav-brand-text">Unified<span>FinOps</span></div>
+    </a>
+    <div class="nav-links" id="navLinks">
+      <a href="index.html" class="nav-link active">Home</a>
+
+      <a href="about.html" class="nav-link">About</a>
+      <a href="features.html" class="nav-link">Platform</a>
+      <a href="contact.html" class="nav-link">Contact</a>
+      <a href="login.html" class="nav-link">Login</a>
+      <a href="register.html" class="nav-cta"><i class="bi bi-arrow-right-circle"></i> Get Started</a>
+    </div>
+    <button class="nav-menu-btn" id="menuBtn" aria-label="Toggle menu">
+      <i class="bi bi-list"></i>
+    </button>
+  </nav>
+
+  <div class="page-wrapper">
+
+    <!-- ═══════════════════════════════════════
+         1. HERO SECTION
+    ═══════════════════════════════════════ -->
+    <section class="hero" id="hero">
+      <div class="hero-content">
+        <div class="hero-badge"><i class="bi bi-lightning-charge-fill"></i> Enterprise FinOps Platform</div>
+        <h1 class="hero-title">Unified Financial<br />Intelligence Platform</h1>
+        <p class="hero-subtitle">A scalable FinOps platform that centralizes financial data from ERP systems, cloud
+          bills, procurement tools, and spreadsheets to provide real-time spending visibility and automated policy
+          enforcement.</p>
+        <div class="hero-actions">
+          <a href="register.html" class="btn-primary"><i class="bi bi-rocket-takeoff"></i> Get Started</a>
+        </div>
+        <div class="hero-chips">
+          <span class="hero-chip"><i class="bi bi-shield-check"></i> SOC 2 Compliant</span>
+          <span class="hero-chip"><i class="bi bi-graph-up-arrow"></i> Real-time Analytics</span>
+          <span class="hero-chip"><i class="bi bi-gear"></i> Policy Automation</span>
+          <span class="hero-chip"><i class="bi bi-building"></i> Multi-department</span>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="dashboard-preview">
+          <div class="dash-topbar">
+            <div class="dash-topbar-left">
+              <div class="dash-dot" style="background: #EA4335;"></div>
+              <div class="dash-dot" style="background: #FBBC05;"></div>
+              <div class="dash-dot" style="background: #34A853;"></div>
+              <span class="dash-topbar-title">Financial Dashboard</span>
+            </div>
+            <div class="dash-topbar-right">
+              <span class="dash-tab active">Overview</span>
+              <span class="dash-tab">Departments</span>
+              <span class="dash-tab">Reports</span>
+            </div>
+          </div>
+          <div class="dash-stats">
+            <div class="dash-stat">
+              <div class="dash-stat-label">Total Budget</div>
+              <div class="dash-stat-value" style="color: var(--blue);">₹19.6 Cr</div>
+              <div class="dash-stat-change" style="color: var(--green);"><i class="bi bi-arrow-up-short"></i> 12.5%
+              </div>
+            </div>
+            <div class="dash-stat">
+              <div class="dash-stat-label">Total Spent</div>
+              <div class="dash-stat-value" style="color: var(--red);">₹14.7 Cr</div>
+              <div class="dash-stat-change" style="color: var(--yellow);"><i class="bi bi-arrow-up-short"></i> 75%</div>
+            </div>
+            <div class="dash-stat">
+              <div class="dash-stat-label">Savings</div>
+              <div class="dash-stat-value" style="color: var(--green);">₹5.2 Cr</div>
+              <div class="dash-stat-change" style="color: var(--green);"><i class="bi bi-arrow-up-short"></i> 8.2%</div>
+            </div>
+          </div>
+          <div class="dash-chart" id="dashChart">
+            <!-- JS will populate bars -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <div class="section-divider"></div>
+    <section class="section" id="platform" data-aos="fade-up">
+      <div class="section-label"><i class="bi bi-layers"></i> Platform Modules</div>
+      <h2 class="section-title">Built for Government and<br />Private Organizations</h2>
+      <p class="section-subtitle">Two purpose-built modules tailored for the unique needs of public and private sector
+        financial operations.</p>
+
+      <div class="dual-grid">
+        <div class="dual-panel public" data-aos="fade-right" data-aos-delay="100">
+          <div class="dual-panel-header">
+            <div class="dual-panel-icon" style="background: var(--blue-light); color: var(--blue);"><i
+                class="bi bi-bank"></i></div>
+            <div>
+              <div class="dual-panel-title">Public Sector Module</div>
+              <div class="dual-panel-badge" style="background: var(--blue-light); color: var(--blue);">Government</div>
+            </div>
+          </div>
+          <div class="dual-list">
+            <div class="dual-list-item"><i class="bi bi-cloud-arrow-up" style="color: var(--blue);"></i> Upload
+              financial datasets (CSV / Excel)</div>
+            <div class="dual-list-item"><i class="bi bi-layout-text-window-reverse" style="color: var(--blue);"></i>
+              Department-level dashboards</div>
+            <div class="dual-list-item"><i class="bi bi-eye" style="color: var(--blue);"></i> Budget transparency
+              monitoring</div>
+            <div class="dual-list-item"><i class="bi bi-file-earmark-check" style="color: var(--blue);"></i> Audit-ready
+              reports and compliance</div>
+          </div>
+        </div>
+        <div class="dual-panel private" data-aos="fade-left" data-aos-delay="100">
+          <div class="dual-panel-header">
+            <div class="dual-panel-icon" style="background: var(--green-light); color: var(--green);"><i
+                class="bi bi-briefcase"></i></div>
+            <div>
+              <div class="dual-panel-title">Private Sector Module</div>
+              <div class="dual-panel-badge" style="background: var(--green-light); color: var(--green);">Enterprise
+              </div>
+            </div>
+          </div>
+          <div class="dual-list">
+            <div class="dual-list-item"><i class="bi bi-plug" style="color: var(--green);"></i> API integrations with
+              financial tools</div>
+            <div class="dual-list-item"><i class="bi bi-bar-chart-steps" style="color: var(--green);"></i> Vendor cost
+              analytics</div>
+            <div class="dual-list-item"><i class="bi bi-pie-chart" style="color: var(--green);"></i> Project-level
+              spending insights</div>
+            <div class="dual-list-item"><i class="bi bi-grid-1x2" style="color: var(--green);"></i> Enterprise
+              dashboards & reporting</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+         8. SECURITY & ROLES SECTION
+    ═══════════════════════════════════════ -->
+    <div class="section-divider"></div>
+    <section class="section" id="security" data-aos="fade-up">
+      <div class="section-label"><i class="bi bi-lock"></i> Access Control</div>
+      <h2 class="section-title">Role-Based Security</h2>
+      <p class="section-subtitle">Fine-grained access control ensures the right people see the right data. Every action
+        is logged and auditable.</p>
+
+      <div class="roles-grid">
+        <div class="role-card" data-aos="fade-up" data-aos-delay="50">
+          <div class="role-icon" style="background: var(--blue-light); color: var(--blue);"><i
+              class="bi bi-person-gear"></i></div>
+          <div class="role-title">Admin</div>
+          <div class="role-desc">Full platform control with data management and policy configuration capabilities.</div>
+          <div class="role-perms">
+            <div class="role-perm"><i class="bi bi-check-circle-fill"></i> Upload financial data</div>
+            <div class="role-perm"><i class="bi bi-check-circle-fill"></i> Manage policies & rules</div>
+            <div class="role-perm"><i class="bi bi-check-circle-fill"></i> Configure departments</div>
+            <div class="role-perm"><i class="bi bi-check-circle-fill"></i> Full dashboard access</div>
+          </div>
+        </div>
+        <div class="role-card" data-aos="fade-up" data-aos-delay="150">
+          <div class="role-icon" style="background: var(--yellow-light); color: #B06D00;"><i
+              class="bi bi-person-badge"></i></div>
+          <div class="role-title">Finance Manager</div>
+          <div class="role-desc">Department-level oversight with reporting and budget management capabilities.</div>
+          <div class="role-perms">
+            <div class="role-perm"><i class="bi bi-check-circle-fill"></i> View department dashboards</div>
+            <div class="role-perm"><i class="bi bi-check-circle-fill"></i> Generate reports</div>
+            <div class="role-perm"><i class="bi bi-check-circle-fill"></i> Approve transactions</div>
+            <div class="role-perm"><i class="bi bi-check-circle-fill"></i> Budget monitoring</div>
+          </div>
+        </div>
+        <div class="role-card" data-aos="fade-up" data-aos-delay="250">
+          <div class="role-icon" style="background: var(--green-light); color: var(--green);"><i
+              class="bi bi-person"></i></div>
+          <div class="role-title">Viewer</div>
+          <div class="role-desc">Read-only access to dashboards and reports for stakeholders and auditors.</div>
+          <div class="role-perms">
+            <div class="role-perm"><i class="bi bi-check-circle-fill"></i> View dashboards</div>
+            <div class="role-perm"><i class="bi bi-check-circle-fill"></i> View reports</div>
+            <div class="role-perm"><i class="bi bi-check-circle-fill"></i> Export data</div>
+            <div class="role-perm"><i class="bi bi-check-circle-fill"></i> Read-only access</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="js/main.js"></script>
+</body>
+
+</html>

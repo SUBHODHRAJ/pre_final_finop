@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard — Unified FinOps Platform</title>
+  <meta name="description"
+    content="Hierarchical financial monitoring platform for Tamil Nadu government infrastructure projects." />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/dashboard.css" />
+</head>
+
+<body>
+  <div class="dash-layout">
+
+    <!-- ═══ SIDEBAR ═══ -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <div class="sidebar-logo">FO</div>
+        <div class="sidebar-brand">Unified<span>FinOps</span></div>
+      </div>
+      <nav class="sidebar-nav">
+        <div class="sidebar-section-title">Analytics</div>
+        <a href="dashboard.html" class="sidebar-item active"><i class="bi bi-grid-1x2"></i> Dashboard</a>
+        <a href="departments.html" class="sidebar-item"><i class="bi bi-building"></i> Departments</a>
+        <a href="vendors.html" class="sidebar-item"><i class="bi bi-shop"></i> Vendors</a>
+        <a href="ownership.html" class="sidebar-item"><i class="bi bi-diagram-3"></i> Spend Graph</a>
+
+        <div class="sidebar-section-title">Data</div>
+        <a href="upload.html" class="sidebar-item"><i class="bi bi-database-gear"></i> Data Lake</a>
+        <a href="erp.html" class="sidebar-item"><i class="bi bi-plug"></i> ERP Integration</a>
+        <a href="reports.html" class="sidebar-item"><i class="bi bi-file-earmark-bar-graph"></i> Reports</a>
+
+        <div class="sidebar-section-title">Governance</div>
+        <a href="policies.html" class="sidebar-item"><i class="bi bi-shield-check"></i> Policy Engine</a>
+        <a href="anomaly.html" class="sidebar-item"><i class="bi bi-robot"></i> AI Anomaly</a>
+        <a href="audit-ledger.html" class="sidebar-item"><i class="bi bi-journal-bookmark"></i> Audit Ledger</a>
+        <a href="policies.html#alerts" class="sidebar-item"><i class="bi bi-bell"></i> Alerts <span
+            class="badge">5</span></a>
+
+        <div class="sidebar-section-title">System</div>
+        <a href="#" class="sidebar-item"><i class="bi bi-gear"></i> Settings</a>
+      </nav>
+      <div class="sidebar-footer">
+        <div class="sidebar-user">
+          <div class="sidebar-avatar">A</div>
+          <div>
+            <div class="sidebar-user-name">Admin</div>
+            <div class="sidebar-user-role">Finance Controller</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ═══ MAIN CONTENT ═══ -->
+    <main class="dash-main">
+      <!-- Top Bar -->
+      <div class="dash-topnav">
+        <div class="dash-topnav-left">
+          <button class="dash-menu-btn" id="dashMenuBtn"><i class="bi bi-list"></i></button>
+          <div class="dash-breadcrumb">
+            <span>FinOps</span>
+            <i class="bi bi-chevron-right"></i>
+            <span class="dash-breadcrumb-active">Executive Dashboard</span>
+          </div>
+        </div>
+        <div class="dash-topnav-right">
+          <div class="dash-search">
+            <i class="bi bi-search"></i>
+            <input type="text" placeholder="Search projects..." />
+          </div>
+          <button class="dash-icon-btn" title="Notifications">
+            <i class="bi bi-bell"></i>
+            <span class="notif-dot"></span>
+          </button>
+          <a href="index.html" class="dash-icon-btn" title="Home"><i class="bi bi-house"></i></a>
+        </div>
+      </div>
+
+      <!-- Dashboard Content -->
+      <div class="dash-content">
+        <!-- Page Header -->
+        <div class="dash-page-header">
+          <div>
+            <h1 class="dash-page-title">Financial Intelligence Platform</h1>
+            <p class="dash-page-subtitle">Government infrastructure spending analytics — FY 2025-26 — Tamil Nadu</p>
+          </div>
+          <div class="dash-header-actions">
+            <button class="btn-secondary" onclick="exportDashboard()"><i class="bi bi-download"></i> Export</button>
+            <a href="upload.html" class="btn-primary"><i class="bi bi-cloud-arrow-up"></i> Upload Data</a>
+          </div>
+        </div>
+
+        <!-- ══════════════════════════════════════════════════
+             1. EXECUTIVE FINANCIAL SUMMARY
+        ══════════════════════════════════════════════════ -->
+        <div class="fi-section-header">
+          <div class="fi-section-title">Executive Summary</div>
+          <div class="fi-ai-badge"><i class="bi bi-lightning-charge-fill"></i> LIVE</div>
+        </div>
+        <div class="exec-grid" id="execSummary">
+          <!-- Rendered by JS -->
+        </div>
+
+        <!-- ══════════════════════════════════════════════════
+             2. DOMAIN CARDS
+        ══════════════════════════════════════════════════ -->
+        <div class="fi-section-header">
+          <div class="fi-section-title">Government Domains</div>
+          <div class="fi-ai-badge"><i class="bi bi-diagram-3"></i> HIERARCHICAL VIEW</div>
+        </div>
+        <p style="font-size: 13px; color: var(--text2); margin: -8px 0 16px;">Click a domain to explore its projects and
+          financial breakdown.</p>
+
+        <div class="domain-grid" id="domainGrid">
+          <!-- Rendered by JS -->
+        </div>
+
+        <!-- ══════════════════════════════════════════════════
+             3. PROJECT DRILL-DOWN PANEL (expandable)
+        ══════════════════════════════════════════════════ -->
+        <div id="projectPanel" style="display: none;"></div>
+
+        <!-- ══════════════════════════════════════════════════
+             4. ANOMALY & ALERT PANEL
+        ══════════════════════════════════════════════════ -->
+        <div class="fi-section-header" style="margin-top: 8px;">
+          <div class="fi-section-title">Policy Engine — Anomaly Detection</div>
+          <div class="fi-ai-badge"><i class="bi bi-shield-exclamation"></i> MONITORING</div>
+        </div>
+        <p style="font-size: 12px; color: var(--text2); margin: -8px 0 14px;">Auto-detected when any spending category
+          exceeds its allocated budget by more than 10%.</p>
+
+        <div class="smart-alerts-list" id="alertsPanel">
+          <!-- Rendered by JS -->
+        </div>
+
+        <!-- ══════════════════════════════════════════════════
+             5. CHARTS
+        ══════════════════════════════════════════════════ -->
+        <div class="chart-grid">
+          <div class="dash-card">
+            <div class="dash-card-header">
+              <div>
+                <div class="dash-card-title">Monthly Spending Trend</div>
+                <div class="dash-card-subtitle">Aggregated across all domains — FY 2025-26</div>
+              </div>
+            </div>
+            <div class="chart-wrap"><canvas id="spendTrendChart"></canvas></div>
+          </div>
+          <div class="dash-card">
+            <div class="dash-card-header">
+              <div>
+                <div class="dash-card-title">Domain Distribution</div>
+                <div class="dash-card-subtitle">Spending by domain sector</div>
+              </div>
+            </div>
+            <div class="chart-wrap"><canvas id="domainDistChart"></canvas></div>
+          </div>
+        </div>
+
+        <!-- Charts Row 2 -->
+        <div class="chart-grid" style="grid-template-columns: 1fr;">
+          <div class="dash-card">
+            <div class="dash-card-header">
+              <div>
+                <div class="dash-card-title">Top Projects by Spending</div>
+                <div class="dash-card-subtitle">Highest spend across all domains</div>
+              </div>
+            </div>
+            <div class="chart-wrap"><canvas id="topProjectsChart"></canvas></div>
+          </div>
+        </div>
+
+        <!-- ══════════════════════════════════════════════════
+             6. HIERARCHY VISUALIZATION
+        ══════════════════════════════════════════════════ -->
+        <div class="fi-section-header">
+          <div class="fi-section-title">Platform Hierarchy</div>
+        </div>
+        <div class="dash-card" style="padding: 28px;">
+          <div class="hierarchy-visual">
+            <div class="hier-level">
+              <div class="hier-node hier-root"><i class="bi bi-diagram-3"></i> Domains</div>
+              <div class="hier-arrow"><i class="bi bi-arrow-right"></i></div>
+              <div class="hier-node hier-mid"><i class="bi bi-folder2-open"></i> Projects</div>
+              <div class="hier-arrow"><i class="bi bi-arrow-right"></i></div>
+              <div class="hier-node hier-mid2"><i class="bi bi-currency-rupee"></i> Financial Breakdown</div>
+              <div class="hier-arrow"><i class="bi bi-arrow-right"></i></div>
+              <div class="hier-node hier-leaf"><i class="bi bi-bell"></i> Alerts & Insights</div>
+            </div>
+            <div class="hier-desc">
+              <div class="hier-desc-item"><strong>5</strong> Government Sectors</div>
+              <div class="hier-desc-item"><strong>12</strong> Infrastructure Projects</div>
+              <div class="hier-desc-item"><strong>~60</strong> Cost Categories</div>
+              <div class="hier-desc-item"><strong>Real-time</strong> Overrun Detection</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <script src="js/dashboard.js"></script>
+</body>
+
+</html>
