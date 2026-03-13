@@ -41,15 +41,14 @@
         <a href="policies.html#alerts" class="sidebar-item"><i class="bi bi-bell"></i> Alerts <span
             class="badge">5</span></a>
 
-        <div class="sidebar-section-title">System</div>
-        <a href="#" class="sidebar-item"><i class="bi bi-gear"></i> Settings</a>
+
       </nav>
       <div class="sidebar-footer">
-        <div class="sidebar-user">
-          <div class="sidebar-avatar">A</div>
+        <div class="sidebar-user" id="sidebarUser" style="cursor:pointer" title="View Profile">
+          <div class="sidebar-avatar" id="sidebarAvatar">?</div>
           <div>
-            <div class="sidebar-user-name">Admin</div>
-            <div class="sidebar-user-role">Finance Controller</div>
+            <div class="sidebar-user-name" id="sidebarName">Loading…</div>
+            <div class="sidebar-user-role" id="sidebarRole">—</div>
           </div>
         </div>
       </div>
@@ -93,7 +92,6 @@
           </div>
           <div class="dash-header-actions">
             <button class="btn-secondary" onclick="window.print()"><i class="bi bi-download"></i> Export</button>
-            <button class="btn-secondary" id="verifyIntegrityBtn"><i class="bi bi-shield-check"></i> Verify Integrity</button>
             <button class="btn-primary" onclick="openAddModal()"><i class="bi bi-plus-lg"></i> Add Entry</button>
           </div>
         </div>
@@ -255,6 +253,7 @@
                 <th>Approved By</th>
                 <th>Status</th>
                 <th>Cryptographic Hash</th>
+                <th>Actions</th>
               </tr>
             </thead>
             <tbody id="ledgerBody">

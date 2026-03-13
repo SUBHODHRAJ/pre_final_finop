@@ -33,15 +33,15 @@
         <a href="audit-ledger.html" class="sidebar-item"><i class="bi bi-journal-bookmark"></i> Audit Ledger</a>
         <a href="policies.html#alerts" class="sidebar-item"><i class="bi bi-bell"></i> Alerts <span
             class="badge">3</span></a>
-        <div class="sidebar-section-title">System</div>
-        <a href="#" class="sidebar-item"><i class="bi bi-gear"></i> Settings</a>
+
+
       </nav>
       <div class="sidebar-footer">
         <div class="sidebar-user">
-          <div class="sidebar-avatar">A</div>
+          <div class="sidebar-avatar" id="sidebarAvatar">A</div>
           <div>
-            <div class="sidebar-user-name">Admin</div>
-            <div class="sidebar-user-role">Finance Controller</div>
+            <div class="sidebar-user-name" id="sidebarName">Admin</div>
+            <div class="sidebar-user-role" id="sidebarRole">Finance Controller</div>
           </div>
         </div>
       </div>
@@ -215,6 +215,7 @@
       </div>
     </main>
   </div>
+  <script src="js/sidebar-profile.js"></script>
   <script src="js/dashboard.js"></script>
 </body>
 

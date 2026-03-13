@@ -32,12 +32,52 @@ const STATUS_CONFIG = {
 // ── Initialize ───────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
   loadLedgerFromAPI();
+  loadUserProfile();
   bindFilters();
   bindSidebar();
   bindAddEntryForm();
   bindCSVUpload();
-  bindVerifyButton();
 });
+
+// ══════════════════════════════════════════════════════════
+// USER PROFILE — Sidebar
+// ══════════════════════════════════════════════════════════
+
+async function loadUserProfile() {
+  try {
+    const res = await fetch('/api/me');
+    const data = await res.json();
+    if (data.loggedIn && data.user) {
+      const { userName, orgName, role } = data.user;
+      // Avatar: first two initials of userName
+      const initials = userName
+        ? userName.split(' ').map(w => w[0]).join('').substring(0, 2).toUpperCase()
+        : '?';
+      const avatarEl = document.getElementById('sidebarAvatar');
+      const nameEl   = document.getElementById('sidebarName');
+      const roleEl   = document.getElementById('sidebarRole');
+      if (avatarEl) avatarEl.textContent = initials;
+      if (nameEl)   nameEl.textContent   = userName || 'User';
+      if (roleEl)   roleEl.textContent   = orgName  || role || 'Finance Controller';
+    } else {
+      // Not logged in — show fallback
+      const avatarEl = document.getElementById('sidebarAvatar');
+      const nameEl   = document.getElementById('sidebarName');
+      const roleEl   = document.getElementById('sidebarRole');
+      if (avatarEl) avatarEl.textContent = 'A';
+      if (nameEl)   nameEl.textContent   = 'Admin';
+      if (roleEl)   roleEl.textContent   = 'Finance Controller';
+    }
+  } catch (err) {
+    // Silent fail — fallback to static
+    const avatarEl = document.getElementById('sidebarAvatar');
+    const nameEl   = document.getElementById('sidebarName');
+    const roleEl   = document.getElementById('sidebarRole');
+    if (avatarEl) avatarEl.textContent = 'A';
+    if (nameEl)   nameEl.textContent   = 'Admin';
+    if (roleEl)   roleEl.textContent   = 'Finance Controller';
+  }
+}
 
 // ══════════════════════════════════════════════════════════
 // DATA LOADING — FROM API
@@ -433,6 +473,16 @@ function renderTable(data) {
         ? '<span class="ledger-source manual">NEW</span>'
         : '';
 
+    const actionCell = entry.status === 'pending'
+      ? `<button
+            class="approve-btn"
+            id="approve-btn-${entry.id}"
+            onclick="approveEntry('${entry.id}')"
+            title="Approve this pending entry">
+            <i class="bi bi-check-circle-fill"></i> Approve
+         </button>`
+      : `<span style="color:var(--text3);font-size:12px;">—</span>`;
+
     return `
       <tr>
         <td><span class="ledger-evt-id">${entry.id}</span>${sourceTag}</td>
@@ -452,8 +502,64 @@ function renderTable(data) {
         </td>
         <td><span class="ledger-status ${entry.status}"><i class="bi ${cfg.icon}"></i> ${cfg.label}</span></td>
         <td><span class="ledger-hash"><span class="ledger-hash-prefix">SHA-256:</span> ${shortHash}…</span></td>
+        <td>${actionCell}</td>
       </tr>`;
   }).join('');
+}
+
+// ══════════════════════════════════════════════════════════
+// APPROVE PENDING ENTRY
+// ══════════════════════════════════════════════════════════
+
+async function approveEntry(originalId) {
+  const btn = document.getElementById(`approve-btn-${originalId}`);
+  if (btn) {
+    btn.disabled = true;
+    btn.innerHTML = '<i class="bi bi-hourglass-split"></i> Approving…';
+  }
+
+  // Find the original pending entry
+  const original = ledgerData.find(e => e.id === originalId);
+  if (!original) {
+    showToast('Original entry not found', 'error');
+    if (btn) { btn.disabled = false; btn.innerHTML = '<i class="bi bi-check-circle-fill"></i> Approve'; }
+    return;
+  }
+
+  // Build a new follow-up approved entry
+  const newEntry = {
+    department: original.department,
+    project:    original.project,
+    vendor:     original.vendor,
+    policy:     original.policy,
+    action:     `Approved (ref: ${originalId})`,
+    approver:   'Finance Controller',
+    status:     'approved'
+  };
+
+  try {
+    const res = await fetch('/api/audit-ledger', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(newEntry)
+    });
+    const data = await res.json();
+
+    if (data.success) {
+      // Add new approved entry at the top
+      ledgerData.unshift(data.entry);
+      populateFilters();
+      renderKPIs(ledgerData);
+      renderTable(ledgerData);
+      showToast(`✓ ${originalId} approved → new entry ${data.entry.id} created & hashed`, 'success');
+    } else {
+      showToast(data.error || 'Failed to approve entry', 'error');
+      if (btn) { btn.disabled = false; btn.innerHTML = '<i class="bi bi-check-circle-fill"></i> Approve'; }
+    }
+  } catch (err) {
+    showToast('Server error: ' + err.message, 'error');
+    if (btn) { btn.disabled = false; btn.innerHTML = '<i class="bi bi-check-circle-fill"></i> Approve'; }
+  }
 }
 
 // ── Sidebar Toggle ───────────────────────────────────────
